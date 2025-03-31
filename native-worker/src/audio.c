@@ -1,6 +1,6 @@
 #include "audio.h"
 
-void normalize(float *samples, int count) {
+float normalize(float *samples, int count) {
     float max = 0.0f;
     for (int i = 0; i < count; i++) {
         float val = samples[i];
@@ -8,10 +8,11 @@ void normalize(float *samples, int count) {
         if (-val > max) max = -val;
     }
 
-    if (max == 0.0f) return;
+    if (max == 0.0f) return 0.0f;
 
     for (int i = 0; i < count; i++) {
         samples[i] /= max;
     }
 
+    return max;
 }
